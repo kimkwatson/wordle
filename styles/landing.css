@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Fauna+One&family=Hepta+Slab&display=swap');
+
+body {
+    height: 100%;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 0 0 80vh;
+    background-color: #E3E3E1;
+    text-align: center;
+}
+
+img {
+    height: 80px;
+    width: 80px;
+    padding-top: 10%;
+}
+
+h1 {
+    font-family: 'Hepta Slab', serif;
+    font-weight: 900;
+}
+
+h2 {
+    font-family: 'Hepta Slab', serif;
+}
+
+.play-button {
+    background-color: black;
+    color: white;
+    font-size: 1rem;
+    height: 3rem;
+    width: 180px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+footer {
+    flex: 0 0 20vh;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}

@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap');
+
+:root {
+    --green: #70b579;
+    --yellow: #e3cd62;
+    --darkgray: #808b96;
+    --flip-color: #ffffff;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    display:flex;
+    height: 2rem;
+    border-bottom: solid 2px whitesmoke;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+header img {
+    display: flex;
+    height: 30px;
+    width: 30px;
+}
+
+header p {
+    display: flex;
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.7rem;
+    letter-spacing: .3rem;
+    padding: 1rem;
+}
+
+main {
+     margin: 0 auto;
+     width: 100%;
+     max-width: 680px;
+}
+
+#message {
+    background-color: black;
+    color: white;
+    font-family: 'Assistant', sans-serif;
+    font-size: 1rem;
+    text-align: center;
+    visibility: hidden;
+    padding: .5rem;
+    display: inline-block;
+    position: absolute;
+    top: 6%;
+    left: 50%;
+    border-radius: 5px;
+}
+
+#message.bounce {
+    animation: bounce .6s ease forwards;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateX(-50%) translateY(0);
+        animation-timing-function: ease-in;;
+    }
+    50% {
+        transform: translateX(-50%) translateY(-15px);
+        animation-timing-function: ease-out;
+    }
+    100% {
+        transform: translateX(-50%) translateY(0);
+        animation-timing-function: ease-in;
+    }
+}
+
+#grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1.7rem;
+    padding: 1rem;
+}
+
+.row {
+    display: flex;
+    width: 265px;
+    justify-content: center;
+}
+
+.letter-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    border: 2px solid #DCDCDC;
+    outline: none;
+    background-color: white;
+    color: black;
+    text-transform: uppercase;
+    font-family: 'Assistant', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    width: 100%;
+    height: 50px;
+    margin: .1rem;
+    transform-origin: center;
+    transition: color .6s ease, border .6s ease;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+@keyframes flipLetter {
+    0% {
+        transform: translateY(0) translateX(0) rotateX(0deg);
+        border: 2px solid #DCDCDC;
+        background-color: white;
+        color: transparent;
+    }
+    50% {
+        transform: translateY(0) translateX(0) rotateX(90deg);
+        background-color: var(--flip-color);
+        color: transparent;
+    }
+    100% {
+        transform: translateY(0) translateX(0) rotateX(0deg);
+        background-color: var(--flip-color);
+        color: white;
+        border: 2px solid transparent;
+    }
+}
+
+.letter-box[contenteditable="true"]:empty:before {
+    content: "";
+    color: gray;
+    cursor: none;
+}
+
+.letter-box:empty {
+    outline: none;
+}
+
+.letter-box.has-letter {
+    border: 2px solid #888888;
+}
+
+.letter-box.grow {
+    transform: scale(1.1);
+}
+
+.letter-box[contenteditable="true"]:empty:focus {
+    cursor: none;
+    background-color: transparent;
+    text-align: center;
+    transition: transform 0.05s ease-in-out;
+}
+
+.keyboard {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    width: 100%;
+    max-width: 360px;
+    margin: 1rem auto;
+}
+
+.keyboard-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.2rem;
+}
+
+.key, .special-key {
+    display: flex;
+    float: left;
+    justify-content: center;
+    align-items: center;
+    height: 45px;
+    padding: 1rem;
+    margin: .1rem;
+    background-color: #d3d6da;
+    border: none;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-size: 1rem;
+    font-family: 'Assistant', sans-serif;
+    cursor: pointer;
+}
+
+.key {
+    width: 30px;
+}
+
+.special-key {
+    width: 50px;
+    font-size: .6rem;
+}
+
+.special-key:last-child {
+    font-size: .8rem;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    margin: 3rem auto 0 auto;
+    width: 100%;
+    text-align: center;
+    font-size: .75rem;
+}
+
+footer span {
+    padding: .5rem;
+}
+
+@media (max-width: 1400px) {
+    
+    #grid {
+        margin: 3rem;
+    }
+}
+
+@media (max-width: 430px) {
+    
+    #message {
+        top: 8%;
+    }
+    
+    footer {
+        display: block;
+    }
+
+    footer span {
+        display: none;
+    }
+}
