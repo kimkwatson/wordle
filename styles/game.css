@@ -20,6 +20,12 @@ header {
     padding: 1rem;
 }
 
+header button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
 header img {
     display: flex;
     height: 30px;

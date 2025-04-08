@@ -8,19 +8,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/game.css">
+    <link rel="stylesheet" href="styles/instructions.css">
 </head>
 <body>
   <header>
-    <div><img src='images/help.png'></div>
+    <div><button id="help-button"><img src="images/help.png"></button></div>
     <p>Wordle</p>
-    <div><img src='images/statistics.png'></div>
+    <div><img src="images/statistics.png"></div>
   </header>
   <main>
     <div id="help-modal" class="modal">
       <div class="instructions">
         <span class="close-button">&times;</span>
-        <h2>Game Instructions</h2>
-        <p>How to Play</p>
+        <h2>How To Play</h2>
+        <p>Guess the Wordle in 6 tries.</p>
+        <ul id="bullet-list">
+          <li>Each guess must be a valid 5-letter word.</li>
+          <li>The color of the tiles will change to show how close your guess was to the word.</li>
+        </ul>
       </div>
     </div>
     <h2 id="message"></h2>
@@ -116,5 +121,6 @@
   <script src="js/feedback.mjs" type="module"></script>
   <script src="js/wordSelection.mjs" type="module"></script>
   <script src="js/statistics.mjs" type="module"></script>
+  <script src="js/helpModal.js"></script>
 </body>
 </html>
