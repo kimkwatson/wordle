@@ -162,7 +162,7 @@ export function updateStatistics() {
     localStorage.setItem("Guess Distribution", JSON.stringify(distribution));
 }
 
-export function getMessage(word) {
+export function getMessage() {
     let message = '';
     if (attempt === 1) {
         message = 'GENIUS';

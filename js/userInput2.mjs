@@ -114,7 +114,7 @@ export function handleEnter(inputs, input, answerWord) {
         }, index * 100); // Flip animation timing
     });
 
-    // Wait for flips to finish and then change colors
+    // Wait for flips to finish and then change keyboard colors
     setTimeout(() => {
         applyKeyboardColors(keys, keyColors); // Apply colors to keyboard
     }, inputs.length * 350);

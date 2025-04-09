@@ -2,7 +2,7 @@ export function getWord() {
     return 'SPEND'; // Or replace with your API logic later
 }
 
-let randomWord = '';
+//let randomWord = '';
 
 export async function getRandomWord() {
     const URL = "https://gist.githubusercontent.com/mrhead/f0ced2726394588e8d9863e0568b6473/raw/89e48277775f30e60ff60592d6e3d4acfe733e10/wordle.json";
@@ -27,25 +27,4 @@ export async function getRandomWord() {
     } catch (error) {
         console.error(error.message)
     }
-
-    /*fetch(URL)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if(Array.isArray(data)) {
-                const randomIndex = Math.floor(Math.random() * data.length);
-                randomWord = data[randomIndex];
-            } else {
-                console.error('Data is not an array');
-            }
-        })
-        .catch(error => {
-            console.error('There was an error fetching the word list:', error);
-        });*/
-
-
 }
