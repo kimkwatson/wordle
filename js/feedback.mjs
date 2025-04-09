@@ -99,8 +99,4 @@ export function displayMessage(message) {
         setTimeout(() => {
             flag.style.visibility = 'hidden';
         }, 1500);
-
-        setTimeout(() => {
-            endGame();
-        }, 1000);
 }

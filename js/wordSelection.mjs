@@ -16,9 +16,6 @@ export async function getRandomWord() {
         const randomIndex = Math.floor(Math.random() * json.length); // Get a random index
         const randomWord = json[randomIndex]; // Select the word at that index
 
-        // Store the word in local storage
-        localStorage.setItem('randomWord', randomWord);
-
         return randomWord.toUpperCase();
     } catch (error) {
         console.error(error.message)

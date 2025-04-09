@@ -126,8 +126,11 @@ export function getGuess() {
                 
             } else if (event.key === 'Enter') {
                 event.preventDefault(); // Prevent default behavior
-                console.log('just checking...', currentWord);
-                handleEnter(inputs, input, currentWord);
+                if (inputs[4].textContent === '') {
+                    displayMessage('Not enough letters');
+                } else {
+                    handleEnter(inputs, input, currentWord);
+                }
             } else if (event.key === 'Tab') {
                 event.preventDefault(); // Do not allow tab to move cursor
             }
@@ -203,5 +206,7 @@ export function endGame(didWin) {
     }
     
     updateStatistics();
-    playAgain();
+    setTimeout(() => {
+        playAgain();
+    }, 3500);
 }

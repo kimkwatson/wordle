@@ -40,17 +40,9 @@ export function handleBackspace(inputs, input, index) {
 }
 
 export function handleEnter(inputs, input, answerWord) {
-    // Handle enter
-    console.log('removing event listener');
+    // Remove event listeners
     input.removeEventListener('keydown', input.handleKeydown); // Remove keydown listener
     input.removeEventListener('input', input.handleInput); // Remove input listener
-
-    // Check that all 5 boxes are filled
-    //if (inputs[4] === '') {
-        //shakeWord();
-        //showMessage('Not enough letters');
-        //return; // Exit early
-    //}
     
     // Check for winning word endgame
     checkWord(inputs, answerWord);
