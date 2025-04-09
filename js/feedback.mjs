@@ -64,10 +64,13 @@ export function applyKeyboardColors(keys, keyColors) {
 
 export function checkWord(letters, answerWord) {
     const guessWord = Array.from(letters).map(input => input.textContent.toUpperCase()).join('');
+
+    if (!validWords.includes(guessWord)) {
+        displayMessage('Not in word list');
+    }
     
     if (guessWord === answerWord) {
         console.log('end game. you won.');
-        //updateStatistics();
 
         // Get and display message
         setTimeout(() => {

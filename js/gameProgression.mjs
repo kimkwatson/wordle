@@ -3,9 +3,11 @@ import { displayMessage } from './feedback.mjs';
 import { getRandomWord } from './wordSelection.mjs';
 
 let attempt = 1;
+localStorage.setItem("Attempt", JSON.stringify(attempt));
 let currentWord = '';
 let games = localStorage.getItem("Total Games") || 0;
 let wins = parseInt(localStorage.getItem("Wins")) || 0;
+let currentStreak = parseInt(localStorage.getItem("Current Streak")) || 0;
 
 const grid = document.querySelector('#grid');
 let distribution = localStorage.getItem("Guess Distribution");
@@ -21,7 +23,7 @@ if (distribution === null) {
     localStorage.setItem("Guess Distribution", distribution);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener("load", () => {
         attempt = 1;
       });
@@ -30,13 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function initializeGame() {
-    /*window.addEventListener('focus', () => {
+    window.addEventListener('focus', () => {
         // Focus on first input box
         const firstInputBox = document.querySelector('.letter-box');
         if (firstInputBox && !firstInputBox.contains(document.activeElement)) {
             firstInputBox.focus();
         }
-    });*/
+    });
     
     grid.addEventListener('mousedown', (event) => {
         event.preventDefault();
@@ -53,7 +55,6 @@ async function initializeGame() {
 }
 
 export function continueGame() {
-    //updateStatistics();
     if (attempt <= 6) {
         getGuess();
     } else {
@@ -69,14 +70,20 @@ export function continueGame() {
 export function getGuess() {
     // Get a single row for word guess
     const inputs = getInputsForRow(attempt);
-    
+
     // Focus on first input of row
     inputs[0].focus();
+
+    document.addEventListener('click', (event) => {
+        if (event.type === 'keydown') return;
+        event.preventDefault();
+        inputs[0].focus();
+    });
 
     // Listen for user action
     inputs.forEach((input, index) => {
         // Hide the cursor
-        input.style.caretColor = 'transparent';
+        //input.style.caretColor = 'transparent';
         
         // Prevent clicking on input fields
         input.addEventListener('click', (event) => {
@@ -135,7 +142,7 @@ export function getGuess() {
                 event.preventDefault(); // Do not allow tab to move cursor
             }
         };  
-        //input.addEventListener('input', function() {
+        
         function handleInput() {
             // Ensure only one letter is stored in the box
             if (input.textContent.length > 1) {
@@ -167,6 +174,7 @@ export function updateStatistics() {
     // Update local storage
     localStorage.setItem("Total Games", JSON.stringify(games));
     localStorage.setItem("Wins", JSON.stringify(wins))
+    localStorage.setItem("Current Streak", JSON.stringify(currentStreak));
     localStorage.setItem("Guess Distribution", JSON.stringify(distribution));
 }
 
@@ -203,6 +211,9 @@ export function endGame(didWin) {
     console.log(didWin);
     if (didWin) {
         wins++;
+        currentStreak++;
+    } else {
+        currentStreak = 0;
     }
     
     updateStatistics();

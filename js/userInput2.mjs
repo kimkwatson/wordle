@@ -1,5 +1,4 @@
 import { checkWord, checkLetters, applyLetterColors, applyKeyboardColors } from "./feedback.mjs";
-import { continueGame } from "./gameProgression.mjs";
 
 const keys = document.querySelectorAll('.key');
 

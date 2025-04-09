@@ -22,12 +22,16 @@ window.addEventListener('click', (event) => {
 });
 
 function renderStatistics() {
-    const wins = localStorage.getItem('Wins');
+    const games = localStorage.getItem('Total Games') || 0;
+    const wins = localStorage.getItem('Wins') || 0;
+    const winPercent = Math.ceil(((Number(wins))/ games) * 100) || 0;
+    const currentStreak = localStorage.getItem('Current Streak') || 0;
+
     console.log(wins);
     document.getElementById('loaded-stats').innerHTML =`
-        <span>Wins: ${wins}</span>
-        <span>Win %: ${wins}</span>
-        <span>Current Streak: ${wins}</span>
+        <span>Played: ${games}</span>
+        <span>Win %: ${winPercent}</span>
+        <span>Current Streak: ${currentStreak}</span>
         <h2>Guess Distribution</h2>
         <div>Bar Charts</div>
     `;
