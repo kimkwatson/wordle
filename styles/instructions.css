@@ -9,7 +9,19 @@
     --flip-color: #ffffff;
 }
 
-.help-modal {
+/**** Help Modal Styling ****/
+
+#help.modal {
+    display: none;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    overflow: hidden;
+}
+
+#stats.modal {
     display: none;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.7);
@@ -31,7 +43,19 @@
     z-index: 2;
 }
 
-.instructions h1 {
+.statistics {
+    background-color: white;
+    box-shadow: 0px 0px 25px var(--darkgray);
+    padding: 20px;
+    width: 30%;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.instructions h1, .statistics h1 {
     font-family: "Crete Round", serif;
     font-size: 1.5rem;
     font-weight: 700;
@@ -102,7 +126,7 @@ span.gray-highlight {
     border-bottom: 1px solid var(--lightgray);
 }
 
-.close-button {
+.close-button, .close-button2 {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -113,7 +137,7 @@ span.gray-highlight {
 @media (max-width: 500px) {
 
     .instructions {
-        width: 80%;
+        width: 90%;
         top: 8%;
     }
 }
