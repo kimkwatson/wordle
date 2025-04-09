@@ -6,7 +6,7 @@ modal.style.display = 'none';
 
 helpButton.addEventListener('click', () => {
     
-    modal.style.display = 'flex';
+    modal.style.display = 'block';
     renderwExample();
     renderiExample();
     renderuExample();
@@ -18,7 +18,7 @@ closeButton.addEventListener('click', () => {
 
 // Close modal if user clicks outside of it
 window.addEventListener('click', (event) => {
-    if (event.target === modal) {
+    if (event.target === document.querySelector('body')) {
         modal.style.display = 'none';
     }
 });

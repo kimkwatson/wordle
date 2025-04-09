@@ -1,15 +1,6 @@
-window.addEventListener('focus', () => {
-    // Automatically focus the first input box when the page is focused
-    const firstInputBox = document.querySelector('.letter-box');
-    if (firstInputBox && !firstInputBox.contains(document.activeElement)) {
-        firstInputBox.focus();
-    }
-});
-
 import { getInputsForRow, getKeyboardButtons, handleLetter, handleBackspace, handleEnter } from './userInput2.mjs';
 import { displayMessage } from './feedback.mjs';
-import { getWord, getRandomWord } from './wordSelection.mjs';
-//import { saveStats } from './statistics.mjs';
+import { getRandomWord } from './wordSelection.mjs';
 
 let attempt = 1;
 let currentWord = '';
@@ -34,6 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function initializeGame() {
+    window.addEventListener('focus', () => {
+        // Automatically focus the first input box when the page is focused
+        const firstInputBox = document.querySelector('.letter-box');
+        if (firstInputBox && !firstInputBox.contains(document.activeElement)) {
+            firstInputBox.focus();
+        }
+    });
+    
     currentWord = await getRandomWord();  // Await the result of getRandomWord
         if (currentWord) {
         console.log('Answer Word: ', currentWord);
@@ -52,8 +51,7 @@ export function continueGame() {
         setTimeout(() => {
             displayMessage(currentWord);
         }, currentWord.length * 600);
-        
-        return;
+        endGame();
     }
 
     //nextLine();
@@ -179,6 +177,20 @@ export function getMessage() {
     }
 
     return message;
+}
+
+function playAgain () {
+    const buttonDiv = document.getElementById('button-div');
+    buttonDiv.style.display = 'flex';
+    
+    const playAgainButton = document.querySelector('.play-again-button');
+    playAgainButton.addEventListener('click', function() {
+        window.location.reload(); // Refreshes the page
+    });    
+}
+
+export function endGame() {
+    playAgain();
 }
 
 /*export function checkGameStatus(inputs) {

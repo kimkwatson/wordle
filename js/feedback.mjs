@@ -1,4 +1,4 @@
-import { storeGuess, updateStatistics, getMessage, continueGame, nextLine } from "./gameProgression.mjs";
+import { storeGuess, updateStatistics, getMessage, continueGame, nextLine, endGame } from "./gameProgression.mjs";
 
 export function checkLetters(letters, answerWord) {
     let answerLetterCounts = {};
@@ -96,6 +96,9 @@ export function displayMessage(message) {
         // Remove message
         setTimeout(() => {
             flag.style.visibility = 'hidden';
-        }, 1200);
+        }, 1500);
 
+        setTimeout(() => {
+            endGame();
+        }, 1000);
 }

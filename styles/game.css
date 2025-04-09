@@ -209,6 +209,24 @@ main {
     font-size: .8rem;
 }
 
+#button-div {
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+button.play-again-button {
+    background-color: black;
+    color: white;
+    font-size: 1rem;
+    height: 3rem;
+    width: 180px;
+    border-radius: 25px;
+    margin-top: 1.25rem;
+    align-self: center;
+    cursor: pointer;
+}
+
 footer {
     display: flex;
     justify-content: center;
