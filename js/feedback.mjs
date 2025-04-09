@@ -11,7 +11,7 @@ export function checkLetters(letters, answerWord) {
         answerLetterCounts[letter] = (answerLetterCounts[letter] || 0) + 1;
     }
 
-    // First pass: Mark correct letter (green)
+    // Mark correct letter (green)
     letters.forEach((letter, index) => {
         let letterText = letter.textContent.toUpperCase();
 
@@ -22,7 +22,7 @@ export function checkLetters(letters, answerWord) {
         }
     });
 
-    // Second pass: Mark yellow (present but misplaced) and darkgray (not in word)
+    // Mark yellow (present but misplaced) and darkgray (not in word)
     letters.forEach((letter) => {
         let letterText = letter.textContent.toUpperCase();
 
@@ -38,7 +38,7 @@ export function checkLetters(letters, answerWord) {
         }
     });
 
-    return { letterColors, keyColors }; // Return both mappings
+    return { letterColors, keyColors }; // Return both maps
 }
 
 export function applyLetterColors(letters, letterColors) {
@@ -67,21 +67,23 @@ export function checkWord(letters, answerWord) {
     
     if (guessWord === answerWord) {
         console.log('end game. you won.');
-        updateStatistics();
+        //updateStatistics();
 
         // Get and display message
         setTimeout(() => {
             let message = getMessage();
             displayMessage(message);
         }, letters.length * 500);
+
+        let didWin = true;
+        // You won. End the Game
+        endGame(didWin);
         
-        //isGameOverCallback(true);
     } else {
         console.log('nope. not right.');
         storeGuess(guessWord);
         nextLine();
         continueGame();
-        //isGameOverCallback(false);
     }
 }
 

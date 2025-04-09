@@ -1,11 +1,6 @@
-//import { newLine } from './gameProgression.mjs';
 import { checkWord, checkLetters, applyLetterColors, applyKeyboardColors } from "./feedback.mjs";
 import { continueGame } from "./gameProgression.mjs";
-//import { checkGameStatus, initializeGame } from "./gameProgression.mjs";
 
-//let answerWord = 'HELLO';
-//let attempt = 1;
-//const inputs = document.querySelectorAll(`#grid-row${attempt} .letter-box`);
 const keys = document.querySelectorAll('.key');
 
 export function getInputsForRow(attempt) {
@@ -15,31 +10,6 @@ export function getInputsForRow(attempt) {
 export function getKeyboardButtons() {
     return document.querySelectorAll('.key');
 }
-
-//const inputs = getInputsForRow(attempt); // Query for the first row
-
-/*export function startNewLine() {
-    console.log('Attempt:', attempt);
-
-    // Get the new row (next attempt)
-    const nextRowInputs = document.querySelectorAll(`#grid-row${attempt} .letter-box`);
-
-    /* Clear the current input fields
-    inputs.forEach(input => {
-        input.textContent = ''; // Clear the current input field
-        input.classList.remove('has-letter', 'flip'); // Remove classes like has-letter or flip
-    });*/
-
-    // Focus on the first letter box in the next row
-    /*if (nextRowInputs.length > 0) {
-        nextRowInputs[0].focus(); // Focus the first input of the next line
-        console.log(`Focus moved to: grid-row${attempt} first box.`);
-    } else {
-        console.log('No more rows available!');
-    }
-
-    console.log(`Starting new line: Attempt ${attempt}`);
-}*/
 
 export function handleLetter(inputs, input, index) {
     setTimeout(() => {
@@ -75,15 +45,6 @@ export function handleEnter(inputs, input, answerWord) {
     input.removeEventListener('keydown', input.handleKeydown); // Remove keydown listener
     input.removeEventListener('input', input.handleInput); // Remove input listener
 
-    //attempt++;
-
-    //if(attempt < 6) {
-        //const nextInputs = getInputsForRow(attempt);
-        //continueGame();
-        //console.log('New Inputs:', nextInputs);
-    //} else {
-        //console.log('Game Over! You Lost');
-    //}
     // Check that all 5 boxes are filled
     //if (inputs[4] === '') {
         //shakeWord();
@@ -92,7 +53,6 @@ export function handleEnter(inputs, input, answerWord) {
     //}
     
     // Check for winning word endgame
-    console.log('Passed correctly: ', answerWord);
     checkWord(inputs, answerWord);
 
     // Mark letters and keyboard colors

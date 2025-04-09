@@ -24,5 +24,11 @@ window.addEventListener('click', (event) => {
 function renderStatistics() {
     const wins = localStorage.getItem('Wins');
     console.log(wins);
-    document.getElementById('loaded-stats').innerHTML =`<span>Wins: ${wins}</span>`;
+    document.getElementById('loaded-stats').innerHTML =`
+        <span>Wins: ${wins}</span>
+        <span>Win %: ${wins}</span>
+        <span>Current Streak: ${wins}</span>
+        <h2>Guess Distribution</h2>
+        <div>Bar Charts</div>
+    `;
 }

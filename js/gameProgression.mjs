@@ -4,19 +4,22 @@ import { getRandomWord } from './wordSelection.mjs';
 
 let attempt = 1;
 let currentWord = '';
-//let isGameWon = false;
-//let totalAttempts = 6;
-let wins = 0;
-let distribution = {
-    "1": 0,
-    "2": 0,
-    "3": 0,
-    "4": 0,
-    "5": 0,
-    "6": 0
-};
+let games = localStorage.getItem("Total Games") || 0;
+let wins = parseInt(localStorage.getItem("Wins")) || 0;
 
 const grid = document.querySelector('#grid');
+let distribution = localStorage.getItem("Guess Distribution");
+if (distribution === null) {
+    distribution = {
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0
+    };
+    localStorage.setItem("Guess Distribution", distribution);
+}
 
 document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("load", () => {
@@ -27,13 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function initializeGame() {
-    window.addEventListener('focus', () => {
-        // Automatically focus the first input box when the page is focused
+    /*window.addEventListener('focus', () => {
+        // Focus on first input box
         const firstInputBox = document.querySelector('.letter-box');
         if (firstInputBox && !firstInputBox.contains(document.activeElement)) {
             firstInputBox.focus();
         }
-    });
+    });*/
     
     grid.addEventListener('mousedown', (event) => {
         event.preventDefault();
@@ -50,6 +53,7 @@ async function initializeGame() {
 }
 
 export function continueGame() {
+    //updateStatistics();
     if (attempt <= 6) {
         getGuess();
     } else {
@@ -57,17 +61,19 @@ export function continueGame() {
         setTimeout(() => {
             displayMessage(currentWord);
         }, currentWord.length * 600);
-        endGame();
+        let didWin = false;
+        endGame(didWin);
     }
-
-    //nextLine();
 }
 
 export function getGuess() {
-    const inputs = getInputsForRow(attempt); // Query for the first row
-    // Focus the first input initially
+    // Get a single row for word guess
+    const inputs = getInputsForRow(attempt);
+    
+    // Focus on first input of row
     inputs[0].focus();
-    console.log(attempt)
+
+    // Listen for user action
     inputs.forEach((input, index) => {
         // Hide the cursor
         input.style.caretColor = 'transparent';
@@ -99,7 +105,7 @@ export function getGuess() {
                 handleKeydown({ key: key });
             });
         });*/
-        
+
         //input.addEventListener('keydown', function(event) {
         function handleKeydown(event) {
             console.log('Keydown event triggered for input:', input);
@@ -145,23 +151,18 @@ export function storeGuess(word) {
 export function nextLine() {
     attempt++;
     localStorage.setItem("Attempt", JSON.stringify(attempt));
-
-    console.log('Attempt:', attempt);
-    //getGuess();
-    
-        /*if (nextRowInputs.length > 0) {
-            nextRowInputs[0].focus(); // Focus the first input of the next line
-            console.log(`Focus moved to: grid-row${attempt} first box.`);
-        } else {
-            console.log('No more rows available!');
-        }*/
-    
-        console.log(`Starting new line: Attempt ${attempt}`);
+    console.log(`Starting new line: Attempt ${attempt}`);
 }
 
 export function updateStatistics() {
-    wins++;
+    games++;
+    //wins++;
+
+    distribution = JSON.parse(localStorage.getItem("Guess Distribution"));
     distribution[attempt]++;
+
+    // Update local storage
+    localStorage.setItem("Total Games", JSON.stringify(games));
     localStorage.setItem("Wins", JSON.stringify(wins))
     localStorage.setItem("Guess Distribution", JSON.stringify(distribution));
 }
@@ -191,67 +192,16 @@ function playAgain () {
     
     const playAgainButton = document.querySelector('.play-again-button');
     playAgainButton.addEventListener('click', function() {
-        window.location.reload(); // Refreshes the page
+        window.location.reload(); // Refresh the page
     });    
 }
 
-export function endGame() {
+export function endGame(didWin) {
+    console.log(didWin);
+    if (didWin) {
+        wins++;
+    }
+    
+    updateStatistics();
     playAgain();
-}
-
-/*export function checkGameStatus(inputs) {
-    if (isGameWon) {
-        console.log('Got it! You win, woohoo.');
-        return;
-    }
-
-    if (attempt > totalAttempts) {
-        console.log(`Nope, not it. The word was: ${currentWord}`);
-        return;
-    }
-
-    checkWord(inputs);
-    let { letterColors, keyColors } = checkLetters(inputs);
-    applyLetterColors(inputs, letterColors);
-    applyKeyboardColors(keyColors);
-
-    if (inputs.every((input, index) => input.textContent.toUpperCase() === currentWord[index].toUpperCase())) {
-        isGameWon = true;
-        console.log('Yep, that is correct. Good job');
-    } else {
-        attempt++;
-        const nextRowInputs = document.querySelectorAll(`#grid-row${attempt} .letter-box`);
-        if (nextRowInputs.length > 0) {
-            console.log('Nope. Not right. Try again.');
-            storeGuess(inputs.join());
-            startNewLine(nextRowInputs, attempt);
-        }
-    }
-}*/
-
-/*function handleEnter() {
-    const inputs = document.querySelectorAll(#grid-row${currentRow} .letter-box);
-
-    let { letterColors, keyColors } = checkLetters(inputs, answerWord);
-
-    applyLetterColors(inputs, letterColors);
-
-    setTimeout(() => {
-        applyKeyboardColors(document.querySelectorAll('.key'), keyColors);
-    }, inputs.length * 500);
-
-    checkWord(inputs, answerWord, (won) => {
-        if (won) {
-            console.log("You won!");
-        } else if (currentRow < maxRows - 1) {
-            currentRow++;
-            document.querySelector(#grid-row${currentRow} .letter-box).focus();
-        } else {
-            console.log("Game Over! You lost.");
-        }
-    });
-}*/
-
-export function saveGameStats() {
-    saveStats(attempt, gameWon);  // Call the statistics module to save progress
 }
