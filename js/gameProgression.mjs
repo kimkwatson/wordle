@@ -16,6 +16,8 @@ let distribution = {
     "6": 0
 };
 
+const grid = document.querySelector('#grid');
+
 document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("load", () => {
         attempt = 1;
@@ -33,6 +35,10 @@ async function initializeGame() {
         }
     });
     
+    grid.addEventListener('mousedown', (event) => {
+        event.preventDefault();
+    });
+
     currentWord = await getRandomWord();  // Await the result of getRandomWord
         if (currentWord) {
         console.log('Answer Word: ', currentWord);
