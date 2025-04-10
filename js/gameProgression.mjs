@@ -20,7 +20,9 @@ if (distribution === null) {
         "5": 0,
         "6": 0
     };
-    localStorage.setItem("Guess Distribution", distribution);
+    localStorage.setItem("Guess Distribution", JSON.stringify(distribution));
+} else {
+    distribution = JSON.parse(distribution);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -83,7 +85,7 @@ export function getGuess() {
     // Listen for user action
     inputs.forEach((input, index) => {
         // Hide the cursor
-        //input.style.caretColor = 'transparent';
+        input.style.caretColor = 'transparent';
         
         // Prevent clicking on input fields
         input.addEventListener('click', (event) => {
@@ -104,16 +106,6 @@ export function getGuess() {
             
         });
         
-        // Allow clicking on keyboard keys
-        /*document.querySelectorAll('.key').forEach((button) => {
-            button.addEventListener('click', () => {
-                const key = button.textContent.trim();
-                console.log(key);
-                handleKeydown({ key: key });
-            });
-        });*/
-
-        //input.addEventListener('keydown', function(event) {
         function handleKeydown(event) {
             console.log('Keydown event triggered for input:', input);
             
@@ -166,11 +158,10 @@ export function nextLine() {
 
 export function updateStatistics() {
     games++;
-    //wins++;
 
     distribution = JSON.parse(localStorage.getItem("Guess Distribution"));
     distribution[attempt]++;
-
+    
     // Update local storage
     localStorage.setItem("Total Games", JSON.stringify(games));
     localStorage.setItem("Wins", JSON.stringify(wins))
@@ -215,9 +206,12 @@ export function endGame(didWin) {
     } else {
         currentStreak = 0;
     }
-    
+
     updateStatistics();
     setTimeout(() => {
         playAgain();
+        const modal2 = document.getElementById('stats-modal');
+        modal2.style.display = 'block';
+        renderStatistics();
     }, 3500);
 }

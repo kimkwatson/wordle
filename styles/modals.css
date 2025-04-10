@@ -55,7 +55,52 @@
     z-index: 2;
 }
 
-.instructions h1, .statistics h1 {
+.statistics h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+#loaded-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 auto;
+    padding: 5px;
+    width: 70%;
+    justify-items: center;
+}
+
+#loaded-stats div {
+    font-family: 'Hepta Slab', serif;
+    font-size: 2rem;
+}
+
+#loaded-stats span {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+}
+
+#loaded-dist {
+    display: grid;
+    grid-template-columns: 5% 95%;
+    row-gap: .5rem;
+}
+
+#loaded-dist span {
+    background-color: var(--darkgray);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: white;
+    text-align: right;
+    margin-left: .5rem;
+    padding: .3rem;
+    padding-top: .6rem;
+    padding-right: 1.2rem;
+    width: 22px;
+    height: 1.5rem;
+}
+
+.instructions h1 {
     font-family: "Crete Round", serif;
     font-size: 1.5rem;
     font-weight: 700;
